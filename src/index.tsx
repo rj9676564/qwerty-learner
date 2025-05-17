@@ -52,7 +52,14 @@ function Root() {
         <Suspense fallback={<Loading />}>
           <Routes>
             {isMobile ? (
-              <Route path="/*" element={<Navigate to="/mobile" />} />
+              <>
+                <Route index element={<TypingPage />} />
+                <Route path="/gallery" element={<GalleryPage />} />
+                <Route path="/analysis" element={<AnalysisPage />} />
+                <Route path="/error-book" element={<ErrorBook />} />
+                <Route path="/friend-links" element={<FriendLinks />} />
+                <Route path="/*" element={<Navigate to="/" />} />
+              </>
             ) : (
               <>
                 <Route index element={<TypingPage />} />

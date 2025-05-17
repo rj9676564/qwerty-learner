@@ -25,9 +25,8 @@ export default function Progress({ className }: { className?: string }) {
       <div className="mb-4 flex h-2 overflow-hidden rounded-xl bg-indigo-100 text-xs transition-all duration-300 dark:bg-indigo-200">
         <div
           style={{ width: `${progress}%` }}
-          className={`flex flex-col justify-center whitespace-nowrap rounded-xl text-center text-white shadow-none transition-all duration-300 ${
-            colorSwitcher[phase] ?? 'bg-indigo-200 dark:bg-indigo-300'
-          }`}
+          className={`flex flex-col justify-center whitespace-nowrap rounded-xl text-center text-white shadow-none transition-all duration-300 ${colorSwitcher[phase] ?? 'bg-indigo-200 dark:bg-indigo-300'
+            }`}
         ></div>
       </div>
     </div>

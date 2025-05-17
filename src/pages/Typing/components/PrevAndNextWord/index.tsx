@@ -48,9 +48,8 @@ export default function PrevAndNextWord({ type }: LastAndNextWordProps) {
 
             <div className={`grow-1 flex w-full flex-col ${type === 'next' ? 'items-end text-right' : ''}`}>
               <p
-                className={`font-mono text-2xl font-normal text-gray-700 dark:text-gray-400 ${
-                  !wordDictationConfig.isOpen ? 'tracking-normal' : 'tracking-wider'
-                }`}
+                className={`font-mono text-sm lg:text-2xl font-normal text-gray-700 dark:text-gray-400 ${!wordDictationConfig.isOpen ? 'tracking-normal' : 'tracking-wider'
+                  }`}
               >
                 {headWord}
               </p>

@@ -48,7 +48,7 @@ export default function WordList() {
         </button>
       </Tooltip>
 
-      <Drawer open={isOpen} onClose={closeModal} classNames="bg-stone-50 dark:bg-gray-900">
+      <Drawer open={isOpen} onClose={closeModal} classNames="bg-stone-50 dark:bg-gray-900 w-[15rem]" >
         <Dialog.Title as="h3" className="flex items-center justify-between p-4 text-lg font-medium leading-6 dark:text-gray-50">
           {currentDictTitleValue}
           <IconX onClick={closeModal} className="cursor-pointer" />

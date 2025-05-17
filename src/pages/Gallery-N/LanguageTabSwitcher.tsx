@@ -7,7 +7,7 @@ import jpFlag from '@/assets/flags/ja.png'
 import kkFlag from '@/assets/flags/kk.png'
 import type { LanguageCategoryType } from '@/typings'
 import { RadioGroup } from '@headlessui/react'
-import { useCallback, useContext } from 'react'
+import { useCallback, useContext, useState } from 'react'
 
 export type LanguageTabOption = {
   id: LanguageCategoryType
@@ -28,6 +28,7 @@ export function LanguageTabSwitcher() {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { state, setState } = useContext(GalleryContext)!
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600)
   const onChangeTab = useCallback(
     (tab: string) => {
       setState((draft) => {
@@ -38,14 +39,16 @@ export function LanguageTabSwitcher() {
   )
 
   return (
-    <RadioGroup value={state.currentLanguageTab} onChange={onChangeTab}>
-      <div className="flex items-center space-x-4">
+    <RadioGroup className="z-999 w-full" value={state.currentLanguageTab} onChange={onChangeTab}>
+
+      <div className=" flex items-center space-x-4 flex-row lg:mt-20 flex-wrap gap-y-2">
+
         {options.map((option) => (
-          <RadioGroup.Option key={option.id} value={option.id} className="cursor-pointer">
+          <RadioGroup.Option key={option.id} value={option.id} className="!ml-0 lg:ml-auto cursor-pointer min-w-[6rem]">
             {({ checked }) => (
               <div className={`flex items-center border-b-2 px-2 pb-1 ${checked ? 'border-indigo-500' : 'border-transparent'}`}>
-                <img src={option.flag} className="mr-1.5 h-7 w-7" />
-                <p className={`text-lg font-medium text-gray-700 dark:text-gray-200`}>{option.name}</p>
+                <img src={option.flag} className={`mr-1.5  ${isMobile ? 'h-4 w-4' : 'h-7 w-7'}`} />
+                <p className={`text-sm lg:text-lg font-medium text-gray-700 dark:text-gray-200`}>{option.name}</p>
               </div>
             )}
           </RadioGroup.Option>

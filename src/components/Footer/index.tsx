@@ -8,7 +8,7 @@ import type { InfoPanelType } from '@/typings'
 import { recordOpenInfoPanelAction } from '@/utils'
 import { useAtom } from 'jotai'
 import type React from 'react'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import IconMail from '~icons/material-symbols/mail'
 import IconCoffee2 from '~icons/mdi/coffee'
@@ -26,7 +26,7 @@ import IconFlagChina from '~icons/twemoji/flag-china'
 const Footer: React.FC = () => {
   const [infoPanelState, setInfoPanelState] = useAtom(infoPanelStateAtom)
   const navigate = useNavigate()
-
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600)
   const handleOpenInfoPanel = useCallback(
     (modalType: InfoPanelType) => {
       recordOpenInfoPanelAction(modalType, 'footer')
@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
         <DonatingCard />
       </InfoPanel>
 
-      <InfoPanel
+      {/* <InfoPanel
         openState={infoPanelState.vsc}
         title="VSCode 摸🐟插件"
         icon={IconTerminal2}
@@ -94,8 +94,8 @@ const Footer: React.FC = () => {
           VSCode 插件链接
         </a>
         <br />
-      </InfoPanel>
-
+      </InfoPanel> */}
+      {/* 
       <InfoPanel
         openState={infoPanelState.community}
         title="用户反馈社群"
@@ -120,9 +120,9 @@ const Footer: React.FC = () => {
         <br />
         <img className="ml-1 w-2/6 " src="https://qwerty.kaiyi.cool/weChat-group.png" alt="weChat-group" />
         <br />
-      </InfoPanel>
+      </InfoPanel> */}
 
-      <InfoPanel
+      {/* <InfoPanel
         openState={infoPanelState.redBook}
         title="小红书社群"
         icon={IconXiaoHongShu}
@@ -145,12 +145,12 @@ const Footer: React.FC = () => {
         <img className="ml-1 w-5/12 " src={redBookCode} alt="redBook" />
         <p className="text-sm text-gray-500 dark:text-gray-400">Tips: 从小红书“我”的左上角点击 三 找到 扫一扫</p>
         <br />
-      </InfoPanel>
+      </InfoPanel> */}
 
       <footer className="mb-1 mt-4 flex w-full items-center justify-center gap-2.5 text-sm ease-in" onClick={(e) => e.currentTarget.blur()}>
-        <a href="https://github.com/Kaiyiwing/qwerty-learner" target="_blank" rel="noreferrer" aria-label="前往 GitHub 项目主页">
+        {!isMobile && <a href="https://github.com/Kaiyiwing/qwerty-learner" target="_blank" rel="noreferrer" aria-label="前往 GitHub 项目主页">
           <IconGithub fontSize={15} className="text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-100" />
-        </a>
+        </a>}
 
         <button
           className="cursor-pointer"
@@ -164,7 +164,7 @@ const Footer: React.FC = () => {
           <IconXiaoHongShu fontSize={14} className="text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-500" />
         </button>
 
-        <button
+        {/* <button
           className="cursor-pointer focus:outline-none"
           type="button"
           onClick={(e) => {
@@ -174,7 +174,7 @@ const Footer: React.FC = () => {
           aria-label="加入我们的微信用户群"
         >
           <IconWechat2 fontSize={16} className="text-gray-500 hover:text-green-500 dark:text-gray-400 dark:hover:text-green-500" />
-        </button>
+        </button> */}
 
         <a href="https://twitter.com/real_kai42" target="_blank" title="x" rel="noreferrer">
           <IconTwitter fontSize={16} className="text-gray-500 hover:text-[#1DA1F2] dark:text-gray-400 dark:hover:text-[#1DA1F2]" />
@@ -190,7 +190,6 @@ const Footer: React.FC = () => {
         >
           <IconCoffee2 fontSize={16} className="text-gray-500 hover:text-amber-500 dark:text-gray-400 dark:hover:text-amber-500" />
         </button>
-
         <button
           className="cursor-pointer focus:outline-none"
           type="button"
@@ -232,7 +231,7 @@ const Footer: React.FC = () => {
         >
           @ Qwerty Learner
         </button>
-
+        {/* 
         <a
           className="cursor-pointer text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
           href="https://beian.miit.gov.cn"
@@ -240,10 +239,10 @@ const Footer: React.FC = () => {
           rel="noreferrer"
         >
           鲁ICP备2022030649号
-        </a>
-        <span className="select-none rounded bg-slate-200 px-1 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+        </a> */}
+        {/* <span className="select-none rounded bg-slate-200 px-1 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-400">
           Build <span className="select-all">{LATEST_COMMIT_HASH}</span>
-        </span>
+        </span> */}
       </footer>
     </>
   )

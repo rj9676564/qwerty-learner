@@ -51,6 +51,7 @@ export default function WordComponent({ word, onFinish }: { word: Word; onFinish
 
   const [showTipAlert, setShowTipAlert] = useState(false)
   const wordPronunciationIconRef = useRef<WordPronunciationIconRef>(null)
+  const [mobileInputValue, setMobileInputValue] = useState(''); // 初始值为空字符串
 
   useEffect(() => {
     // run only when word changes
@@ -210,8 +211,10 @@ export default function WordComponent({ word, onFinish }: { word: Word; onFinish
     } else {
       // 出错时
       playBeepSound()
+
       setWordState((state) => {
         state.letterStates[inputLength - 1] = 'wrong'
+        setMobileInputValue('')
         state.hasWrong = true
         state.hasMadeInputWrong = true
         state.wrongCount += 1
@@ -268,7 +271,7 @@ export default function WordComponent({ word, onFinish }: { word: Word; onFinish
         letterTimeArray: wordState.letterTimeArray,
         letterMistake: wordState.letterMistake,
       })
-
+      setMobileInputValue('')
       onFinish()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -289,9 +292,8 @@ export default function WordComponent({ word, onFinish }: { word: Word; onFinish
       >
         {['romaji', 'hapin'].includes(currentLanguage) && word.notation && <Notation notation={word.notation} />}
         <div
-          className={`tooltip-info relative w-fit bg-transparent p-0 leading-normal shadow-none dark:bg-transparent ${
-            wordDictationConfig.isOpen ? 'tooltip' : ''
-          }`}
+          className={`tooltip-info relative w-fit bg-transparent p-0 leading-normal shadow-none dark:bg-transparent ${wordDictationConfig.isOpen ? 'tooltip' : ''
+            }`}
           data-tip="按 Tab 快捷键显示完整单词"
         >
           <div
@@ -312,6 +314,15 @@ export default function WordComponent({ word, onFinish }: { word: Word; onFinish
           )}
         </div>
       </div>
+      <input autoComplete="off" autoCorrect="off"
+        autoFocus
+        style={{
+          opacity: 0,          // 完全透明
+          position: 'absolute', // 脱离文档流
+          left: '-9999px',      // 移出可视区域（可选）
+          pointerEvents: 'none' // 防止意外遮挡（可选）
+        }}
+        spellCheck={false} type="text" value={mobileInputValue} onChange={(e) => setMobileInputValue(e.target.value)} />
       <TipAlert className="fixed bottom-10 right-3" show={showTipAlert} setShow={setShowTipAlert} />
     </>
   )

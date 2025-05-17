@@ -22,6 +22,7 @@ export default function WordPanel() {
   const { times: loopWordTimes } = useAtomValue(loopWordConfigAtom)
   const currentWord = state.chapterData.words[state.chapterData.index]
   const nextWord = state.chapterData.words[state.chapterData.index + 1] as Word | undefined
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600)
 
   const setReviewModeInfo = useSetAtom(reviewModeInfoAtom)
   const isReviewMode = useAtomValue(isReviewModeAtom)
@@ -52,6 +53,7 @@ export default function WordPanel() {
   )
 
   const onFinish = useCallback(() => {
+
     if (state.chapterData.index < state.chapterData.words.length - 1 || currentWordExerciseCount < loopWordTimes - 1) {
       // 用户完成当前单词
       if (currentWordExerciseCount < loopWordTimes - 1) {
@@ -150,7 +152,7 @@ export default function WordPanel() {
 
   return (
     <div className="container flex h-full w-full flex-col items-center justify-center">
-      <div className="container flex h-24 w-full shrink-0 grow-0 justify-between px-12 pt-10">
+      <div className="container flex h-24 w-full shrink-0 grow-0 justify-between px-4 lg:px-12 pt-10">
         {isShowPrevAndNextWord && state.isTyping && (
           <>
             <PrevAndNextWord type="prev" />
@@ -160,17 +162,19 @@ export default function WordPanel() {
       </div>
       <div className="container flex flex-grow flex-col items-center justify-center">
         {currentWord && (
-          <div className="relative flex w-full justify-center">
+          <div className="relative flex w-full justify-center" onClick={() => dispatch({ type: TypingStateActionType.SET_IS_TYPING, payload: true })} >
             {!state.isTyping && (
               <div className="absolute flex h-full w-full justify-center">
                 <div className="z-10 flex w-full items-center backdrop-blur-sm">
                   <p className="w-full select-none text-center text-xl text-gray-600 dark:text-gray-50">
-                    按任意键{state.timerData.time ? '继续' : '开始'}
+
+                    {isMobile ? <p className="w-full select-none text-center text-xl text-gray-600 dark:text-gray-50">双击开始</p> : <p>按任意键{state.timerData.time ? '继续' : '开始'}</p>}
                   </p>
                 </div>
               </div>
             )}
             <div className="relative">
+
               <WordComponent word={currentWord} onFinish={onFinish} key={wordComponentKey} />
               {phoneticConfig.isOpen && <Phonetic word={currentWord} />}
               <Translation
@@ -179,6 +183,7 @@ export default function WordPanel() {
                 onMouseEnter={() => handleShowTranslation(true)}
                 onMouseLeave={() => handleShowTranslation(false)}
               />
+
             </div>
           </div>
         )}

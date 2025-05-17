@@ -1,12 +1,13 @@
 import type { WordUpdateAction } from '../InputHandler'
 import { TypingContext } from '@/pages/Typing/store'
 import type { FormEvent } from 'react'
-import { useCallback, useContext, useEffect, useRef } from 'react'
+import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 
 export default function TextAreaHandler({ updateInput }: { updateInput: (updateObj: WordUpdateAction) => void }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   // eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
   const { state } = useContext(TypingContext)!
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600)
 
   useEffect(() => {
     if (!textareaRef.current) return
@@ -19,6 +20,7 @@ export default function TextAreaHandler({ updateInput }: { updateInput: (updateO
   }, [state.isTyping])
 
   const onInput = (e: FormEvent<HTMLTextAreaElement>) => {
+    console.log('HTMLTextAreaElement ', e)
     const nativeEvent = e.nativeEvent as InputEvent
     if (!nativeEvent.isComposing && nativeEvent.data !== null) {
       updateInput({ type: 'add', value: nativeEvent.data, event: e })
@@ -46,7 +48,9 @@ export default function TextAreaHandler({ updateInput }: { updateInput: (updateO
       onInput={onInput}
       onBlur={onBlur}
       onCompositionStart={() => {
-        alert('您正在使用输入法，请关闭输入法。')
+        if(!isMobile){
+          alert('您正在使用输入法，请关闭输入法。')
+        }
       }}
     ></textarea>
   )

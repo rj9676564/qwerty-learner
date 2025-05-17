@@ -63,12 +63,14 @@ export default function GalleryPage() {
   return (
     <Layout>
       <GalleryContext.Provider value={{ state: galleryState, setState: setGalleryState }}>
-        <div className="relative mb-auto mt-auto flex w-full flex-1 flex-col overflow-y-auto pl-20">
+        <div className="relative mb-auto mt-auto flex w-full flex-1 flex-col overflow-y-auto pl-2 lg:pl-20">
           <IconX className="absolute right-20 top-10 mr-2 h-7 w-7 cursor-pointer text-gray-400" onClick={onBack} />
           <div className="mt-20 flex w-full flex-1 flex-col items-center justify-center overflow-y-auto">
             <div className="flex h-full flex-col overflow-y-auto">
-              <div className="flex h-20 w-full items-center justify-between pb-6">
+              {/* 横向滚动 */}
+              <div className="flex  lg:h-20 w-full items-start lg:items-center gap-y-2 lg:gap-y-0 flex-col lg:flex-row justify-between pb-6 ">
                 <LanguageTabSwitcher />
+
                 <DictRequest />
               </div>
               <ScrollArea.Root className="flex-1 overflow-y-auto">
@@ -90,10 +92,6 @@ export default function GalleryPage() {
                 </ScrollArea.Viewport>
                 <ScrollArea.Scrollbar className="flex touch-none select-none bg-transparent " orientation="vertical"></ScrollArea.Scrollbar>
               </ScrollArea.Root>
-              {/* todo: 增加导航 */}
-              {/* <div className="mt-20 h-40 w-40 text-center ">
-                <CategoryNavigation />
-              </div> */}
             </div>
           </div>
         </div>
