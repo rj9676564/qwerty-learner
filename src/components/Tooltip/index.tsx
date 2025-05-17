@@ -16,11 +16,17 @@ const Tooltip = ({ children, content, className, placement = 'top' }: TooltipPro
         {children}
       </div>
       <div
-        className={`${
-          visible ? 'opacity-100' : 'opacity-0'
-        } ${placementClasses} pointer-events-none absolute left-1/2 flex -translate-x-1/2 transform items-center justify-center transition-opacity`}
+        className={`
+    ${visible ? 'opacity-100' : 'hidden'}
+    ${placementClasses}
+    pointer-events-none absolute left-1/2 flex
+    max-w-[90vw] -translate-x-1/2 transform
+    items-center justify-center transition-opacity
+  `}
       >
-        <span className="tooltip">{content}</span>
+        <span className="tooltip whitespace-nowrap overflow-x-auto px-2">
+          {content}
+        </span>
       </div>
     </div>
   )

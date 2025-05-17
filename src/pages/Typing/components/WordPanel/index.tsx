@@ -22,7 +22,7 @@ export default function WordPanel() {
   const { times: loopWordTimes } = useAtomValue(loopWordConfigAtom)
   const currentWord = state.chapterData.words[state.chapterData.index]
   const nextWord = state.chapterData.words[state.chapterData.index + 1] as Word | undefined
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600)
+
 
   const setReviewModeInfo = useSetAtom(reviewModeInfoAtom)
   const isReviewMode = useAtomValue(isReviewModeAtom)
@@ -168,7 +168,8 @@ export default function WordPanel() {
                 <div className="z-10 flex w-full items-center backdrop-blur-sm">
                   <p className="w-full select-none text-center text-xl text-gray-600 dark:text-gray-50">
 
-                    {isMobile ? <p className="w-full select-none text-center text-xl text-gray-600 dark:text-gray-50">双击开始</p> : <p>按任意键{state.timerData.time ? '继续' : '开始'}</p>}
+                    <span className="lg:hidden w-full select-none text-center text-xl text-gray-600 dark:text-gray-50">双击开始</span>
+                    <span className="hidden lg:block">按任意键{state.timerData.time ? '继续' : '开始'}</span>
                   </p>
                 </div>
               </div>

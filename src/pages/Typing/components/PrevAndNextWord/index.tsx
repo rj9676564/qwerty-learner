@@ -39,7 +39,7 @@ export default function PrevAndNextWord({ type }: LastAndNextWordProps) {
   return (
     <>
       {word ? (
-        <Tooltip content={`快捷键: ${shortCutKey}`}>
+        <Tooltip content={window.innerWidth < 600 ? '' : `快捷键: ${shortCutKey}`}>
           <div
             onClick={onClickWord}
             className="flex max-w-xs cursor-pointer select-none items-center text-gray-700 opacity-60 duration-200 ease-in-out hover:opacity-100 dark:text-gray-400"
@@ -48,13 +48,13 @@ export default function PrevAndNextWord({ type }: LastAndNextWordProps) {
 
             <div className={`grow-1 flex w-full flex-col ${type === 'next' ? 'items-end text-right' : ''}`}>
               <p
-                className={`font-mono text-sm lg:text-2xl font-normal text-gray-700 dark:text-gray-400 ${!wordDictationConfig.isOpen ? 'tracking-normal' : 'tracking-wider'
+                className={`hidden lg:block font-mono text-sm lg:text-2xl font-normal text-gray-700 dark:text-gray-400 ${!wordDictationConfig.isOpen ? 'tracking-normal' : 'tracking-wider'
                   }`}
               >
                 {headWord}
               </p>
               {state.isTransVisible && (
-                <p className="line-clamp-1 max-w-full text-sm font-normal text-gray-600 dark:text-gray-500">{word.trans.join('；')}</p>
+                <p className="hidden lg:block line-clamp-1 max-w-full text-sm font-normal text-gray-600 dark:text-gray-500">{word.trans.join('；')}</p>
               )}
             </div>
             {type === 'next' && <IconNext className="ml-4 shrink-0 grow-0 text-2xl" />}

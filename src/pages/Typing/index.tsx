@@ -140,16 +140,18 @@ const App: React.FC = () => {
             <PronunciationSwitcher />
           </div>
           <Switcher />
-          <StartButton isLoading={isLoading} />
-          <Tooltip content="跳过该词">
-            <button
-              className={`${state.isShowSkip ? 'bg-orange-400' : 'invisible w-0 bg-gray-300 px-0 opacity-0'
-                } my-btn-primary transition-all duration-300 `}
-              onClick={skipWord}
-            >
-              Skip
-            </button>
-          </Tooltip>
+          <div className="flex items-center gap-x-2">
+            <StartButton isLoading={isLoading} />
+            <Tooltip content="跳过该词">
+              <button
+                className={`${state.isShowSkip ? 'bg-orange-400' : 'hidden w-0 bg-gray-300 px-0 opacity-0'
+                  } my-btn-primary transition-all duration-300 `}
+                onClick={skipWord}
+              >
+                Skip
+              </button>
+            </Tooltip>
+          </div>
         </Header>
         <div className="container mx-auto flex h-full flex-1 flex-col items-center justify-center pb-5">
           <div className="container relative mx-auto flex h-full flex-col items-center">
