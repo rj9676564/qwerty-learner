@@ -27,9 +27,8 @@ export default function SoundSwitcher() {
       {({ open }) => (
         <>
           <Popover.Button
-            className={`flex items-center justify-center rounded p-[2px] text-lg text-indigo-500 outline-none transition-colors duration-300 ease-in-out hover:bg-indigo-400 hover:text-white  ${
-              open ? 'bg-indigo-500 text-white' : ''
-            }`}
+            className={`invisible lg:visible flex items-center justify-center rounded p-[2px] text-lg text-indigo-500 outline-none transition-colors duration-300 ease-in-out hover:bg-indigo-400 hover:text-white  ${open ? 'bg-indigo-500 text-white' : ''
+              }`}
             onFocus={(e) => {
               e.target.blur()
             }}
@@ -56,9 +55,8 @@ export default function SoundSwitcher() {
                     <Switch checked={keySoundsConfig.isOpen} onChange={onChangeKeySound} className="switch-root">
                       <span aria-hidden="true" className="switch-thumb" />
                     </Switch>
-                    <span className="text-right text-xs font-normal leading-tight text-gray-600">{`发音已${
-                      keySoundsConfig.isOpen ? '开启' : '关闭'
-                    }`}</span>
+                    <span className="text-right text-xs font-normal leading-tight text-gray-600">{`发音已${keySoundsConfig.isOpen ? '开启' : '关闭'
+                      }`}</span>
                   </div>
                 </div>
                 <div className="flex w-full flex-col items-start  gap-2 py-0">
@@ -67,9 +65,8 @@ export default function SoundSwitcher() {
                     <Switch checked={hintSoundsConfig.isOpen} onChange={onChangeHintSound} className="switch-root">
                       <span aria-hidden="true" className="switch-thumb" />
                     </Switch>
-                    <span className="text-right text-xs font-normal leading-tight text-gray-600">{`发音已${
-                      hintSoundsConfig.isOpen ? '开启' : '关闭'
-                    }`}</span>
+                    <span className="text-right text-xs font-normal leading-tight text-gray-600">{`发音已${hintSoundsConfig.isOpen ? '开启' : '关闭'
+                      }`}</span>
                   </div>
                 </div>
               </div>

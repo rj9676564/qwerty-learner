@@ -6,9 +6,9 @@ import Phonetic from './components/Phonetic'
 import Translation from './components/Translation'
 import WordComponent from './components/Word'
 import { usePrefetchPronunciationSound } from '@/hooks/usePronunciation'
-import { isReviewModeAtom, isShowPrevAndNextWordAtom, loopWordConfigAtom, phoneticConfigAtom, reviewModeInfoAtom } from '@/store'
+import { isReviewModeAtom, isShowPrevAndNextWordAtom, loopWordConfigAtom, phoneticConfigAtom, reviewModeInfoAtom, wordDictationConfigAtom } from '@/store'
 import type { Word } from '@/typings'
-import { useAtomValue, useSetAtom } from 'jotai'
+import { useAtom, useAtomValue, useSetAtom } from 'jotai'
 import { useCallback, useContext, useMemo, useState } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
 
@@ -123,6 +123,7 @@ export default function WordPanel() {
     { preventDefault: true },
   )
   const [isShowTranslation, setIsHoveringTranslation] = useState(false)
+  const [wordDictationConfig, setWordDictationConfig] = useAtom(wordDictationConfigAtom)
 
   const handleShowTranslation = useCallback((checked: boolean) => {
     setIsHoveringTranslation(checked)
@@ -150,8 +151,25 @@ export default function WordPanel() {
     return isShowTranslation || state.isTransVisible
   }, [isShowTranslation, state.isTransVisible])
 
+  const handleTouchStart = (e: any) => {
+    e.preventDefault();
+    console.log(e.clientX, e.clientY);
+    setWordDictationConfig((old) => {
+      return { ...old, isOpen: !old.isOpen }
+    })
+  };
+
+
+  const handleTouchEnd = () => {
+    console.log('触摸结束');
+    setWordDictationConfig((old) => {
+      return { ...old, isOpen: !old.isOpen }
+    })
+  };
+
   return (
-    <div className="container flex h-full w-full flex-col items-center justify-center">
+    <div className="container flex h-full w-full flex-col items-center justify-center " onTouchStart={(e) => handleTouchStart(e)}
+      onTouchEnd={handleTouchEnd}>
       <div className="container flex h-24 w-full shrink-0 grow-0 justify-between px-4 lg:px-12 pt-10">
         {isShowPrevAndNextWord && state.isTyping && (
           <>
@@ -160,7 +178,7 @@ export default function WordPanel() {
           </>
         )}
       </div>
-      <div className="container flex flex-grow flex-col items-center justify-center">
+      <div className="container flex flex-grow flex-col items-center justify-center ">
         {currentWord && (
           <div className="relative flex w-full justify-center" onClick={() => dispatch({ type: TypingStateActionType.SET_IS_TYPING, payload: true })} >
             {!state.isTyping && (

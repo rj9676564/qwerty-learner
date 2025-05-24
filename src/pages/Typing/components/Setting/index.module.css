@@ -1,15 +1,15 @@
 .tab-content {
-  @apply flex w-full flex-col items-start justify-start gap-10 overflow-y-auto pb-40 pl-6 pr-9 pt-8;
+  @apply flex w-full flex-col items-start justify-start gap-10 overflow-y-auto pb-40 pl-2 lg:pl-6 pr-2 lg:pr-9 pt-2 lg:pt-8;
 }
 
 .section {
   @apply flex w-full flex-col items-start gap-4;
 }
 .section-label {
-  @apply pb-0 text-xl font-medium text-gray-600;
+  @apply pb-0 text-xs lg:text-xl font-medium text-gray-600;
 }
 .section-description {
-  @apply -mt-1 pl-4 text-left text-xs font-normal leading-tight text-gray-600;
+  @apply -mt-1 pl-4 text-left text-xs lg:text-base font-normal leading-tight text-gray-600;
 }
 
 .block {

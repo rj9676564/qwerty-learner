@@ -33,8 +33,8 @@ const ConclusionBar = ({ mistakeLevel, mistakeCount }: ConclusionBarProps) => {
 
   return (
     <div className="flex h-10 flex-row items-center">
-      <Icon className={classNames(className, 'h-5 w-5')} />
-      <span className="ml-2 inline-block align-middle text-sm font-medium leading-10 text-gray-700 sm:text-sm md:text-base">
+      <Icon className={classNames(className, 'h-4 w-4 xl:h-5 xl:w-5')} />
+      <span className="ml-2 inline-block align-middle text-xs xl:text-sm font-medium leading-10 text-gray-700 sm:text-sm md:text-base">
         {text(mistakeCount)}
       </span>
     </div>

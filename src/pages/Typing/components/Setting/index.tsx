@@ -33,9 +33,8 @@ export default function Setting() {
       <button
         type="button"
         onClick={openModal}
-        className={`flex items-center justify-center rounded p-[2px] text-lg text-indigo-500 outline-none transition-colors duration-300 ease-in-out hover:bg-indigo-400 hover:text-white  ${
-          isOpen && 'bg-indigo-500 text-white'
-        }`}
+        className={`flex items-center justify-center rounded p-[2px] text-lg text-indigo-500 outline-none transition-colors duration-300 ease-in-out hover:bg-indigo-400 hover:text-white  ${isOpen && 'bg-indigo-500 text-white'
+          }`}
         title="打开设置对话框"
       >
         <IconCog6Tooth className="icon" />
@@ -68,7 +67,7 @@ export default function Setting() {
               >
                 <Dialog.Panel className="flex w-200 flex-col overflow-hidden rounded-2xl bg-white p-0 shadow-xl dark:bg-gray-800">
                   <div className="relative flex h-22 items-end justify-between rounded-t-lg border-b border-neutral-100 bg-stone-50 px-6 py-3 dark:border-neutral-700 dark:bg-gray-900">
-                    <span className="text-3xl font-bold text-gray-600">设置</span>
+                    <span className="text-xl lg:text-3xl font-bold text-gray-600">设置</span>
                     <button type="button" onClick={() => setIsOpen(false)} title="关闭对话框">
                       <IconX className="absolute right-7 top-5 cursor-pointer text-gray-400" />
                     </button>
@@ -76,50 +75,50 @@ export default function Setting() {
 
                   <Tab.Group vertical>
                     <div className="flex h-120 w-full ">
-                      <Tab.List className="flex h-full w-52 flex-col items-start space-y-3  border-r border-neutral-100 bg-stone-50 px-6 py-3 dark:border-transparent dark:bg-gray-900">
+                      <Tab.List className="flex h-full w-24 lg:w-52 flex-col items-start space-y-3  border-r border-neutral-100 bg-stone-50 px-1 lg:px-6 py-3 dark:border-transparent dark:bg-gray-900">
                         <Tab
                           className={({ selected }) =>
                             classNames(
-                              'flex h-14 w-full cursor-pointer items-center gap-2 rounded-lg px-4 py-2 ring-0 focus:outline-none',
+                              'flex h-8 lg:h-14 w-full cursor-pointer items-center gap-2 rounded-lg px-1 lg:px-4 py-2 ring-0 focus:outline-none',
                               selected && 'bg-gray-200 bg-opacity-50 dark:bg-gray-800',
                             )
                           }
                         >
-                          <IconEar className="mr-2 text-neutral-500  dark:text-neutral-300" />
-                          <span className="text-neutral-500 dark:text-neutral-300 ">音效设置</span>
+                          <IconEar className="mr-0 lg:mr-2 text-neutral-500  dark:text-neutral-300" />
+                          <span className="text-xs lg:text-base text-neutral-500 dark:text-neutral-300 ">音效设置</span>
                         </Tab>
                         <Tab
                           className={({ selected }) =>
                             classNames(
-                              'flex h-14 w-full cursor-pointer items-center gap-2 rounded-lg px-4 py-2 ring-0 focus:outline-none',
+                              'flex h-8 lg:h-14 w-full cursor-pointer items-center gap-2 rounded-lg px-1 lg:px-4 py-2 ring-0 focus:outline-none',
                               selected && 'bg-gray-200 bg-opacity-50 dark:bg-gray-800',
                             )
                           }
                         >
-                          <IconAdjustmentsHorizontal className="mr-2 text-neutral-500  dark:text-neutral-300" />
-                          <span className="text-neutral-500 dark:text-neutral-300">高级设置</span>
+                          <IconAdjustmentsHorizontal className="mr-0 lg:mr-2 text-neutral-500  dark:text-neutral-300" />
+                          <span className="text-xs lg:text-base text-neutral-500 dark:text-neutral-300">高级设置</span>
                         </Tab>
                         <Tab
                           className={({ selected }) =>
                             classNames(
-                              'flex h-14 w-full cursor-pointer items-center gap-2 rounded-lg px-4 py-2 ring-0 focus:outline-none',
+                              'flex h-8 lg:h-14 w-full cursor-pointer items-center gap-2 rounded-lg px-1 lg:px-4 py-2 ring-0 focus:outline-none',
                               selected && 'bg-gray-200 bg-opacity-50 dark:bg-gray-800',
                             )
                           }
                         >
-                          <IconEye className="mr-2 text-neutral-500  dark:text-neutral-300" />
-                          <span className="text-neutral-500 dark:text-neutral-300">显示设置</span>
+                          <IconEye className="mr-0 lg:mr-2 text-neutral-500  dark:text-neutral-300" />
+                          <span className="text-xs lg:text-base text-neutral-500 dark:text-neutral-300">显示设置</span>
                         </Tab>
                         <Tab
                           className={({ selected }) =>
                             classNames(
-                              'flex h-14 w-full cursor-pointer items-center gap-2 rounded-lg px-4 py-2 ring-0 focus:outline-none',
+                              'flex h-8 lg:h-14 w-full cursor-pointer items-center gap-2 rounded-lg px-1 lg:px-4 py-2 ring-0 focus:outline-none',
                               selected && 'bg-gray-200 bg-opacity-50 dark:bg-gray-800',
                             )
                           }
                         >
-                          <IconDatabaseCog className="mr-2 text-neutral-500  dark:text-neutral-300" />
-                          <span className="text-neutral-500 dark:text-neutral-300">数据设置</span>
+                          <IconDatabaseCog className="mr-0 lg:mr-2 text-neutral-500  dark:text-neutral-300" />
+                          <span className="text-xs lg:text-base text-neutral-500 dark:text-neutral-300">数据设置</span>
                         </Tab>
                       </Tab.List>
 

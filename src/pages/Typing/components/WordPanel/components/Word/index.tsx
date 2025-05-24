@@ -314,10 +314,13 @@ export default function WordComponent({ word, onFinish }: { word: Word; onFinish
           )}
         </div>
       </div>
-      <input autoComplete="off" autoCorrect="off"
+      <input
+        autoComplete="off"
+        autoCorrect="off"
         autoCapitalize="none"
         autoFocus
         style={{
+          textTransform: 'lowercase',
           opacity: 0,          // 完全透明
           position: 'absolute', // 脱离文档流
           left: '-9999px',      // 移出可视区域（可选）

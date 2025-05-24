@@ -19,7 +19,7 @@ import type { InfoPanelType } from '@/typings'
 import { recordOpenInfoPanelAction } from '@/utils'
 import { Transition } from '@headlessui/react'
 import { useAtom, useAtomValue, useSetAtom } from 'jotai'
-import { useCallback, useContext, useEffect, useMemo } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
 import { useNavigate } from 'react-router-dom'
 import IexportWords from '~icons/icon-park-outline/excel'
@@ -42,7 +42,7 @@ const ResultScreen = () => {
 
   const setReviewModeInfo = useSetAtom(reviewModeInfoAtom)
   const isReviewMode = useAtomValue(isReviewModeAtom)
-
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600)
   useEffect(() => {
     // tick a zero timer to calc the stats
     dispatch({ type: TypingStateActionType.TICK_TIMER, addTime: 0 })
@@ -218,21 +218,21 @@ const ResultScreen = () => {
         leaveTo="opacity-0"
       >
         <div className="flex h-screen items-center justify-center">
-          <div className="my-card fixed flex w-[90vw] max-w-6xl flex-col overflow-hidden rounded-3xl bg-white pb-14 pl-10 pr-5 pt-10 shadow-lg dark:bg-gray-800 md:w-4/5 lg:w-3/5">
+          <div className="my-card fixed flex w-[90vw] max-w-6xl flex-col overflow-hidden rounded-3xl bg-white pb-5 xl:pb-14 pl-5 xl:pl-10 pr-5 xl:pr-5 pt-5 xl:pt-10 shadow-lg dark:bg-gray-800 md:w-4/5 lg:w-3/5">
             <div className="text-center font-sans text-xl font-normal text-gray-900 dark:text-gray-400 md:text-2xl">
               {`${currentDictInfo.name} ${isReviewMode ? '错题复习' : '第' + (currentChapter + 1) + '章'}`}
             </div>
             <button className="absolute right-7 top-5" onClick={exitButtonHandler}>
               <IconX className="text-gray-400" />
             </button>
-            <div className="mt-10 flex flex-row gap-2 overflow-hidden">
-              <div className="flex flex-shrink-0 flex-grow-0 flex-col gap-3 px-4 sm:px-1 md:px-2 lg:px-4">
-                <RemarkRing remark={`${state.timerData.accuracy}%`} caption="正确率" percentage={state.timerData.accuracy} />
-                <RemarkRing remark={timeString} caption="章节耗时" />
-                <RemarkRing remark={state.timerData.wpm + ''} caption="WPM" />
+            <div className="mt-10 flex flex-col xl:flex-row gap-2 overflow-hidden">
+              <div className="flex flex-shrink-0 flex-grow-0 flex-row xl:flex-col items-center  justify-evenly xl:justify-start gap-3 px-2 xs:px-4 sm:px-1 md:px-2 lg:px-4">
+                <RemarkRing remark={`${state.timerData.accuracy}%`} size={isMobile ? 5 : 7} caption="正确率" percentage={state.timerData.accuracy} />
+                <RemarkRing remark={timeString} size={isMobile ? 5 : 7} caption="章节耗时" />
+                <RemarkRing remark={state.timerData.wpm + ''} size={isMobile ? 5 : 7} caption="WPM" />
               </div>
-              <div className="z-10 ml-6 flex-1 overflow-visible rounded-xl bg-indigo-50 dark:bg-gray-700">
-                <div className="customized-scrollbar z-20 ml-8 mr-1 flex h-80 flex-row flex-wrap content-start gap-4 overflow-y-auto overflow-x-hidden pr-7 pt-9">
+              <div className="z-10 ml-2 xs:ml-6 flex-1 overflow-visible rounded-xl bg-indigo-50 dark:bg-gray-700">
+                <div className="customized-scrollbar z-20 ml-2 xs:ml-8 mr-1 flex h-auto xl:h-80 flex-row flex-wrap content-start gap-4 overflow-y-auto overflow-x-hidden pr-2 xs:pr-7 pt-4 xs:pt-9 pb-4 xl:pb-10">
                   {wrongWords.map((word, index) => (
                     <WordChip key={`${index}-${word.name}`} word={word} />
                   ))}
@@ -241,7 +241,7 @@ const ResultScreen = () => {
                   <ConclusionBar mistakeLevel={mistakeLevel} mistakeCount={wrongWords.length} />
                 </div>
               </div>
-              <div className="ml-2 flex flex-col items-center justify-end gap-3 text-xl">
+              <div className="ml-2 flex flex-row xl:flex-col items-center justify-center xl:justify-end gap-3 text-xl">
                 <AuthorButton />
                 {!isReviewMode && (
                   <>
@@ -287,12 +287,12 @@ const ResultScreen = () => {
                 </a>
               </div>
             </div>
-            <div className="mt-10 flex w-full justify-center gap-5 px-5 text-xl">
+            <div className="mt-10 flex w-full justify-center gap-5 px-0 xl:px-5 text-xl">
               {!isReviewMode && (
                 <>
                   <Tooltip content="快捷键：shift + enter">
                     <button
-                      className="my-btn-primary h-12 border-2 border-solid border-gray-300 bg-white text-base text-gray-700 dark:border-gray-700 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700"
+                      className="my-btn-primary px-2  h-10 xs:h-12  border-2 border-solid border-gray-300 bg-white text-xs xl:text-base text-gray-700 dark:border-gray-700 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700"
                       type="button"
                       onClick={dictationButtonHandler}
                       title="默写本章节"
@@ -302,7 +302,7 @@ const ResultScreen = () => {
                   </Tooltip>
                   <Tooltip content="快捷键：space">
                     <button
-                      className="my-btn-primary h-12 border-2 border-solid border-gray-300 bg-white text-base text-gray-700 dark:border-gray-700 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700"
+                      className="my-btn-primary px-2  h-10 xs:h-12  border-2 border-solid border-gray-300 bg-white text-xs xl:text-base text-gray-700 dark:border-gray-700 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-700"
                       type="button"
                       onClick={repeatButtonHandler}
                       title="重复本章节"
@@ -315,7 +315,7 @@ const ResultScreen = () => {
               {!isLastChapter && !isReviewMode && (
                 <Tooltip content="快捷键：enter">
                   <button
-                    className={`{ isLastChapter ? 'cursor-not-allowed opacity-50' : ''} my-btn-primary h-12 text-base font-bold `}
+                    className={`{ isLastChapter ? 'cursor-not-allowed opacity-50' : ''} my-btn-primary px-2 h-10 xs:h-12 text-xs xl:text-base font-bold `}
                     type="button"
                     onClick={nextButtonHandler}
                     title="下一章节"
@@ -327,7 +327,7 @@ const ResultScreen = () => {
 
               {isReviewMode && (
                 <button
-                  className="my-btn-primary h-12 text-base font-bold"
+                  className="my-btn-primary px-2 h-12 text-xs xl:text-base font-bold"
                   type="button"
                   onClick={onNavigateToGallery}
                   title="练习其他章节"

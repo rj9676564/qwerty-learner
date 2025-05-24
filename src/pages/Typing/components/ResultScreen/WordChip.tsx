@@ -24,13 +24,13 @@ export default function WordChip({ word }: { word: WordWithIndex }) {
     <>
       <button
         ref={refs.setReference}
-        className="word-chip select-all"
+        className="word-chip select-all !p-1 xs:!p-2 h-6 xs:h-4"
         {...getReferenceProps()}
         type="button"
         onClick={onClickWord}
         title={`朗读 ${word.name}`}
       >
-        <span>{word.name}</span>
+        <span className="!text-xs">{word.name}</span>
       </button>
       {showTranslation && (
         <div

@@ -107,12 +107,12 @@ export function ErrorBook() {
           <IconX className="h-7 w-7 cursor-pointer text-gray-400" onClick={onBack} />
         </div>
 
-        <div className="flex w-full flex-1 select-text items-start justify-center overflow-hidden">
-          <div className="flex h-full w-5/6 flex-col pt-10">
-            <div className="flex w-full justify-between rounded-lg bg-white px-6 py-5 text-lg text-black shadow-lg dark:bg-gray-800 dark:text-white">
+        <div className="flex w-full flex-1 select-text items-start justify-center overflow-hidden ">
+          <div className="flex h-full mx-5 xl:mx-0 xl:w-5/6 flex-col pt-10">
+            <div className="flex w-full justify-between rounded-lg bg-white px-3 xl:px-6 py-5 text-lg text-black shadow-lg dark:bg-gray-800 dark:text-white">
               <span className="basis-2/12">单词</span>
               <span className="basis-6/12">释义</span>
-              <HeadWrongNumber className="basis-1/12" sortType={sortType} setSortType={setSort} />
+              <HeadWrongNumber className="basis-1/12 " sortType={sortType} setSortType={setSort} />
               <span className="basis-1/12">词典</span>
               <DropdownExport renderRecords={renderRecords} paraphrases={paraphrases} />
             </div>

@@ -16,16 +16,16 @@ export default function WordCard({ word, isActive }: { word: Word; isActive: boo
 
   return (
     <div
-      className={`mb-2 flex cursor-pointer select-text items-center rounded-xl p-4 shadow focus:outline-none ${isActive ? 'bg-indigo-50 dark:bg-indigo-800 dark:bg-opacity-20' : 'bg-white dark:bg-gray-700 dark:bg-opacity-20'
+      className={`mb-2 flex cursor-pointer select-text items-center rounded-xl p-2 lg:p-4 shadow focus:outline-none ${isActive ? 'bg-indigo-50 dark:bg-indigo-800 dark:bg-opacity-20' : 'bg-white dark:bg-gray-700 dark:bg-opacity-20'
         }   `}
       key={word.name}
       onClick={handlePlay}
     >
       <div className="flex-1">
-        <p className={`select-all font-mono  ${isMobile ? 'text-[1rem]' : 'text-xl'} font-normal leading-6 dark:text-gray-50`}>
+        <p className={`select-all font-mono  ${isMobile ? 'text-[1rem]' : 'text-lg lg:text-xl'} font-normal leading-6 dark:text-gray-50`}>
           {['romaji', 'hapin'].includes(currentLanguage) ? word.notation : word.name}
         </p>
-        <div className={`mt-2 max-w-sm font-sans ${isMobile ? 'text-[0.8rem]' : 'text-sm'} text-gray-400`}>{word.trans.join('；')}</div>
+        <div className={`mt-0 xl:mt-2 max-w-sm font-sans ${isMobile ? 'text-[0.6rem]' : 'text-sm'} text-gray-400`}>{word.trans.join('；')}</div>
       </div>
       <WordPronunciationIcon word={word} lang={currentLanguage} className={`${isMobile ? 'h-6 w-6' : 'h-8 w-8'}`} ref={wordPronunciationIconRef} />
     </div>
